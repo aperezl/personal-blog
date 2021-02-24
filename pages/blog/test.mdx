@@ -1,0 +1,116 @@
+---
+layout: "post"
+title: "Test"
+description: "Testing .mdx format"
+---
+
+# Parte 1
+
+Inicializar git
+
+```shell
+git init
+```
+
+Crear nuevo proyecto
+
+```shell
+npx create-next-app .
+```
+
+Vincular repositorio
+
+```
+git commit -m "create next project"
+git remote add origin git@github.com:aperezl/personal-blog.git
+git branch -M main
+git push -u origin main
+```
+
+Instalar dependencias
+
+```
+npm i tailwindcss@latest
+npm i postcss@latest
+npm i autoprefixer@latest
+npm i @tailwindcss/typography
+```
+
+Crear archivo de configuración para next
+
+```shell
+npx tailwindcss init
+```
+
+Pasar el fichero `tailwind.config.js` de
+
+```javascript
+module.exports = {
+  purge: [],
+  darkMode: false, // or 'media' or 'class'
+  theme: {
+    extend: {},
+  },
+  variants: {
+    extend: {},
+  },
+  plugins: [],
+};
+```
+
+a:
+
+```javascript
+module.exports = {
+  purge: ["./pages/**/*.{js,mdx}", "./components/**/*.js"],
+  darkMode: false, // or 'media' or 'class'
+  theme: {
+    extend: {},
+  },
+  variants: {
+    extend: {},
+  },
+  plugins: [require("@tailwindcss/typography")],
+};
+```
+
+crear el fichero `postcss.config.js`
+
+```javascript
+module.exports = {
+  plugins: ["tailwindcss"],
+};
+```
+
+Añadir al fichero `global.css`
+
+```css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+
+NOTA: Investigar sobre el fichero jsconfig.json, porque no le veo utilidad para este proyecto
+
+A parte de eso
+
+- modificar `pages/index.js`
+- eliminar `styles/Home.module.css`y `pages/api/hello.js`
+
+```react
+import Head from 'next/head'
+
+export default function Home() {
+  return (
+    <div>
+      <Head>
+        <title>Peronal Blog</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <h1>Personal Blog</h1>
+    </div>
+  )
+}
+```
+
+# Parte 2
